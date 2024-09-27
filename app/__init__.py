@@ -11,4 +11,8 @@ def create_app(config_class=Config):
 
     mongo.init_app(app)
 
+    from app.routes import auth, files
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(files.bp)
+
     return app
