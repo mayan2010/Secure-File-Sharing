@@ -10,6 +10,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     mongo.init_app(app)
+    mongo.db = mongo.cx['sfss']
 
     from app.routes import auth, files
     app.register_blueprint(auth.bp)

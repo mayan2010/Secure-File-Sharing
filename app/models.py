@@ -9,8 +9,9 @@ class User:
         self.role = role
         self.verified = verified
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    @staticmethod
+    def check_password(password_hash, password):
+        return check_password_hash(password_hash, password)
 
     def save(self):
         return mongo.db.users.insert_one({
