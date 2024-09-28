@@ -10,7 +10,7 @@ import datetime
 def app():
     app = create_app()
     app.config['TESTING'] = True
-    app.config['MONGO_URI'] = 'mongodb://remote:yashank8@140.238.230.140:27017/sfss_test'
+    mongo.db = mongo.cx['sfss_test']
 
     with app.app_context():
         mongo.db.users.delete_many({})
