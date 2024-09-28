@@ -46,7 +46,7 @@ def generate_download_link(file_id, current_user):
     }, current_app.config['SECRET_KEY'])
 
     download_link = f"/secure-download/{download_token}"
-    return {'download_link': download_link, 'message': 'Link successfully generated. Valid for 60 minutes.'}, 201
+    return {'download_link': download_link, 'message': 'Link successfully generated. Valid for 60 minutes.'}, 200
 
 
 def download_file(token, current_user):
