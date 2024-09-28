@@ -9,3 +9,4 @@ class Config:
     MONGO_URI = os.getenv('MONGO_URI')
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
     ALLOWED_EXTENSIONS = {'pptx', 'docx', 'xlsx'}
+    ROOT_DIR = os.path.abspath(os.curdir)

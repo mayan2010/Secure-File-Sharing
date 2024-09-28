@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify, send_file
+import os
+
+from flask import Blueprint, request, jsonify, send_file, current_app
 from app.services.files import upload_file, list_files, generate_download_link, download_file
 from app.utils.decorators import token_required
 
@@ -34,4 +36,4 @@ def secure_download(current_user, token):
     result, status_code = download_file(token, current_user)
     if result.get('message', None):
         return jsonify(result), status_code
-    return send_file(result['path'], as_attachment=True, download_name=result['filename'])
+    return send_file(str(os.path.join(current_app.config['ROOT_DIR'], result['path'])), as_attachment=True, download_name=result['filename'])
