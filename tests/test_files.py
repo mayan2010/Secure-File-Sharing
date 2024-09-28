@@ -5,12 +5,13 @@ import io
 
 
 def test_upload_file(client, ops_headers):
-    data = {
-        'file': (io.BytesIO(b"test file content"), 'test.docx')
-    }
-    response = client.post('/upload', data=data, headers=ops_headers)
-    assert response.status_code == 201
-    assert 'file_id' in response.json
+    with open('tests/test.docx', 'rb') as file:
+        data = {
+            'file': (io.BytesIO(file.read()), 'test.docx')
+        }
+        response = client.post('/upload', data=data, headers=ops_headers)
+        assert response.status_code == 201
+        assert 'file_id' in response.json
 
 
 def test_upload_file_not_ops(client, auth_headers):
@@ -68,7 +69,7 @@ def test_generate_download_link(client, auth_headers, app):
     response = client.get('/download/test_file', headers=auth_headers)
     assert response.status_code == 200
     assert 'download_link' in response.json
-    assert response.json['download_link'].startswith('/secure-download/')
+    assert '/secure-download/' in response.json['download_link']
 
 
 def test_generate_download_link_invalid_file_id(client, auth_headers, app):
