@@ -36,7 +36,7 @@ def auth_headers(app):
         user_id = mongo.db.users.insert_one(user).inserted_id
         token = jwt.encode({
             'user_id': str(user_id),
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)
         }, app.config['SECRET_KEY'])
 
     return {'Authorization': token}
@@ -54,7 +54,7 @@ def ops_headers(app):
         user_id = mongo.db.users.insert_one(user).inserted_id
         token = jwt.encode({
             'user_id': str(user_id),
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)
         }, app.config['SECRET_KEY'])
 
     return {'Authorization': token}
