@@ -83,7 +83,7 @@ def test_secure_download(client, auth_headers, app):
         mongo.db.files.insert_one({
             'file_id': 'test_file',
             'filename': 'test.docx',
-            'path': 'test.docx',
+            'path': 'tests/test.docx',
         })
 
         user_id = mongo.db.users.find_one({'email': 'test@example.com'})['_id']

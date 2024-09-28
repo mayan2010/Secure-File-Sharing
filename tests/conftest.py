@@ -10,6 +10,7 @@ import datetime
 def app():
     app = create_app()
     app.config['TESTING'] = True
+    app.config['UPLOAD_FOLDER'] = 'tests/uploads'
     mongo.db = mongo.cx['sfss_test']
 
     with app.app_context():
