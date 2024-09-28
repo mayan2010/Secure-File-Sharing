@@ -63,7 +63,7 @@ def generate_download_link(file_id, current_user):
         'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=60)
     }, current_app.config['SECRET_KEY'])
 
-    download_link = f"/secure-download/{download_token}"
+    download_link = current_app.config['BASE_URL'] + f"/secure-download/{download_token}"
     return {'download_link': download_link, 'message': 'Link successfully generated. Valid for 60 minutes.'}, 200
 
 

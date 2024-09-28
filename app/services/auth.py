@@ -4,6 +4,23 @@ from app.models import User
 import jwt
 import datetime
 from bson.objectid import ObjectId
+from smtp2go.core import Smtp2goClient
+
+
+payload = """
+Hello,
+This email address was used to create an account in Secure File-Sharing System:
+
+------------------------------------------
+email: %s
+time: %s UTC
+------------------------------------------
+
+Click the link below to verify your email address. This link will expire in 24 hours.
+%s
+
+If this isn't you, please ignore this email.
+"""
 
 
 def signup_user(email, password):
@@ -19,13 +36,17 @@ def signup_user(email, password):
         'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=24)
     }, current_app.config['SECRET_KEY'])
 
-    # TODO: Send verification email with the token
-    verification_url = f"http://127.0.0.1:5000/verify-email/{verification_token}"
+    if not current_app.config['TESTING']:
+        verification_url = current_app.config['BASE_URL'] + f"/verify-email/{verification_token}"
+        smtp_client = Smtp2goClient(current_app.config['SMTP2GO_API_KEY'])
+        smtp_client.send(sender=current_app.config['SMTP2GO_SENDER'],
+                         recipients=[email],
+                         subject='Email Verification - Secure File Sharing System',
+                         text=payload % (email, str(datetime.datetime.now(datetime.UTC))[:19], verification_url))
 
     return {'message': 'User created successfully. '
                        'Check your email for verification link. '
-                       'It will expire in 24 hours.',
-            'verification_url': verification_url}, 201
+                       'It will expire in 24 hours.'}, 201
 
 
 def verify_email(token):
