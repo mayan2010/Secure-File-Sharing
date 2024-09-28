@@ -6,6 +6,17 @@ import uuid
 from werkzeug.utils import secure_filename
 import jwt
 import datetime
+import magic
+
+
+def get_file_type(file_path):
+    mime = magic.from_file(file_path, mime=True)
+    mime_to_ext = {
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx'
+    }
+    return mime_to_ext.get(mime)
 
 
 def allowed_file(filename):
@@ -18,10 +29,17 @@ def upload_file(file, current_user):
     if file and allowed_file(file.filename):
         file_id = str(uuid.uuid4())
         filename = secure_filename(file.filename)
+
         if not os.path.exists(os.path.join(current_app.config['UPLOAD_FOLDER'], file_id[:2])):
             os.makedirs(os.path.join(current_app.config['UPLOAD_FOLDER'], file_id[:2]))
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file_id[:2], file_id[2:] + '_' + filename)
         file.save(file_path)
+
+        file_type = get_file_type(file_path)
+        if not file_type:
+            os.remove(file_path)
+            return {'message': 'Invalid file content. Allowed file types are pptx, docx, xlsx'}, 400
+
         new_file = File(file_id, filename, file_path, str(current_user['_id']))
         new_file.save()
         return {'message': 'File successfully uploaded', 'file_id': file_id}, 201
