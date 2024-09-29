@@ -3,7 +3,7 @@
 
 ### Backend Assessment for EZ Works
 This project is a secure file-sharing system implemented as part of the backend engineer assessment for **EZ Works**.
-You can find the live project at: [TODO](#) <br>
+You can find the live project at: [TODO](#) (This will be taken down after the assessment)<br>
 It provides a RESTful API for secure file upload, download, and management between two types of users: Operation Users and Client Users.
 <hr>
 
@@ -140,7 +140,11 @@ To run the test suite:
 ```shell
 pytest -v tests/
 ```
-You can check out a previous test log at [tests/test_results.log](tests/test_results.log)
+You can check out a previous pytest log at [tests/test_results.log](tests/test_results.log) <br>
+View the postman tests run summary at [assets/Secure File Sharing System.postman_test_run.json](assets/Secure File Sharing System.postman_test_run.json) <br>
+[![Tests Summary](assets/Postman Test Summary.png)](assets/Postman Test Summary.png) <br>
+
+You can also import the Postman collection at [assets/Secure File Sharing System.postman_collection.json](assets/Secure File Sharing System.postman_collection.json)
 <hr>
 
 ### Security Considerations
