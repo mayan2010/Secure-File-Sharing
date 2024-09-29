@@ -24,7 +24,7 @@ def allowed_file(filename):
 
 
 def upload_file(file, current_user):
-    if file.filename == '':
+    if not file or file.filename == '':
         return {'message': 'No file selected for uploading'}, 400
     if file and allowed_file(file.filename):
         file_id = str(uuid.uuid4())

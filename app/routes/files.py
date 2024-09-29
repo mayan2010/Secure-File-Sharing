@@ -12,7 +12,7 @@ bp = Blueprint('files', __name__)
 def upload(current_user):
     if current_user['role'] != 'ops':
         return jsonify({'message': 'You are not allowed to upload files'}), 403
-    result, status_code = upload_file(request.files['file'], current_user)
+    result, status_code = upload_file(request.files.get('file', None), current_user)
     return jsonify(result), status_code
 
 
