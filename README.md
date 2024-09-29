@@ -141,10 +141,14 @@ To run the test suite:
 pytest -v tests/
 ```
 You can check out a previous pytest log at [tests/test_results.log](tests/test_results.log) <br>
-View the postman tests run summary at [assets/Secure File Sharing System.postman_test_run.json](assets/Secure File Sharing System.postman_test_run.json) <br>
-[![Tests Summary](assets/Postman Test Summary.png)](assets/Postman Test Summary.png) <br>
 
-You can also import the Postman collection at [assets/Secure File Sharing System.postman_collection.json](assets/Secure File Sharing System.postman_collection.json)
+View the postman tests run summary at [assets/Secure File Sharing System.postman_test_run.json](assets/Secure%20File%20Sharing%20System.postman_test_run.json) <br>
+
+<p align="center">
+  <img width="700" src="assets/Postman%20Test%20Summary.png">
+</p>
+
+You can also import the Postman collection at [assets/Secure File Sharing System.postman_collection.json](assets/Secure%20File%20Sharing%20System.postman_collection.json)
 <hr>
 
 ### Security Considerations
