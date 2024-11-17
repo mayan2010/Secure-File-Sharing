@@ -4,8 +4,9 @@
 ### Backend Assessment for EZ Works
 This project is a secure file-sharing system implemented as part of the backend engineer assessment for **EZ Works**. <br>
 
-You can find the live project at: [sfss.yashanksingh.in](https://sfss.yashanksingh.in) (This will be taken down after the assessment) <br>
-Create a new account at [sfss.yashanksingh.in/signup](https://sfss.yashanksingh.in/signup). Enter a valid email to get verification link. <br>
+Live project is not available anymore. Check out [Deployment](#deployment) to host your own. <br>
+~~You can find the live project at: [sfss.yashanksingh.in](https://sfss.yashanksingh.in) (This will be taken down after the assessment)~~ <br>
+Create a new account at ~~[sfss.yashanksingh.in/signup](https://sfss.yashanksingh.in/signup)~~. Enter a valid email to get verification link. <br>
 Once verified, login into your account and you will recieve a token. Add it to the `Authorization` header to make protected requests. <br>
 You can now list files, generate download links and download the files. <br>
 
